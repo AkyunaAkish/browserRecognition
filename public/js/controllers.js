@@ -46,7 +46,7 @@ app.controller('MainController', function($scope, $http){
   if(isMobile.any()){
     var mobileBoolean = true;
   }else{
-    var mobileBoolean = true;
+    var mobileBoolean = false;
   }
 
   //On page load an http post request will be sent to the express backend
