@@ -9,7 +9,7 @@ router.post('/addBrowser', function(req,res,next){
     if(doc && doc.isMobile == req.body.isMobile){
       res.json(doc);
     } else{
-      if (!doc && doc.isMobile !== req.body.isMobile && doc.browser !== req.body.browser) {
+      if (!doc) {
         browsers.insert({isMobile: req.body.isMobile, browser: req.body.browser}, function(err, doc){
           res.json(doc);
         })
