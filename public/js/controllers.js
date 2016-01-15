@@ -56,7 +56,6 @@ app.controller('MainController', function($scope, $http){
     //Then the server responds back with either the newly inserted item
     //or reuses a previously created item that matches the
     //current browser and device type
-    console.log('response', response.data);
     $scope.currentState = response.data;
   })
 
