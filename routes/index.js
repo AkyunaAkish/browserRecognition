@@ -6,7 +6,7 @@ var browsers = db.get('browsers');
 
 router.post('/addBrowser', function(req,res,next){
   browsers.findOne({browser: req.body.browser}, function(err, doc){
-    if(doc && doc.isMobile == req.body.isMobile){
+    if(doc && doc.isMobile == req.body.isMobile || doc.isMobile[0] == req.body.isMobile[0]){
       res.json(doc);
     } else{
       browsers.insert({isMobile: req.body.isMobile, browser: req.body.browser}, function(err, doc){
