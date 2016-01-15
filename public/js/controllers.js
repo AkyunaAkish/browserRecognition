@@ -33,13 +33,13 @@ app.controller('MainController', function($scope, $http){
   } else{
     $scope.notMobile = "Not a mobile device."
   }
-
-    $http.post('/addBrowser', {isMobile: isMobile.any(), browser: $scope.browser}).then(function(response){
-      console.log('post', response.data);
-      $http.get('/getBrowsers').then(function(response){
-        console.log('get', response.data);
-      })
+  console.log(isMobile.any(), $scope.browser);
+  $http.post('/addBrowser', {isMobile: isMobile.any(), browser: $scope.browser}).then(function(response){
+    console.log('post', response.data);
+    $http.get('/getBrowsers').then(function(response){
+      console.log('get', response.data);
     })
+  })
 
 
 
