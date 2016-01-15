@@ -1,12 +1,19 @@
 app.controller('MainController', function($scope, $http){
+
+  //Variables that contain booleans determining if a particular browser is present or not
   var isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
   var isFirefox = typeof InstallTrigger !== 'undefined';
   var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
   var isChrome = !!window.chrome && !isOpera;
   var isIE = false || !!document.documentMode;
-  isOpera ? $scope.browser = 'Opera' : isFirefox ? $scope.browser = 'Firefox' : isSafari ?  $scope.browser = 'Safari' : isChrome ? $scope.browser = 'Chrome' : isIE ? $scope.browser = 'Internet Explorer' : "No browser detected";
+
+  //Ternary statement to properly set $scope.browser to the correct browser
+  isOpera ? $scope.browser = 'Opera' : isFirefox ? $scope.browser = 'Firefox' : isSafari ?
+  $scope.browser = 'Safari' : isChrome ? $scope.browser = 'Chrome' : isIE ?
+  $scope.browser = 'Internet Explorer' : "No browser detected";
 
 
+  //isMobile object containing methods to determine if a mobile device is present
   var isMobile = {
     Android: function() {
       return navigator.userAgent.match(/Android/i);
@@ -28,22 +35,22 @@ app.controller('MainController', function($scope, $http){
     }
   };
 
+  //if/else statement to set $scope variables for rendering if a mobile device is
+  //present or not in HTML
   if (isMobile.any()) {
     $scope.mobileDevice = isMobile.any().join();
   } else{
     $scope.notMobile = "Not a mobile device."
   }
-  console.log(isMobile.any(), $scope.browser);
+
+  //On page load an http post request will be sent to the express backend
+  //where the server's logic will determine if the current browser
+  //and device type needs to be assigned an ID or not
   $http.post('/addBrowser', {isMobile: isMobile.any(), browser: $scope.browser}).then(function(response){
-    console.log('post', response.data);
-    $http.get('/getBrowsers').then(function(response){
-      console.log('get', response.data);
-    })
+    //Then the server responds back with either the newly inserted item
+    //or reuses a previously created item that matches the
+    //current browser and device type
+    $scope.currentState = response.data;
   })
-
-
-
-
-
-
+  
 })
