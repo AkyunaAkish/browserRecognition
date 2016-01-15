@@ -1,12 +1,33 @@
-<h1>{{browser}}</h1>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <h4>Augur Code Challenge - Akyuna Akish</h4>
+    </div>
+  </nav>
 
-{{currentState}}
 
-<div ng-if="mobileDevice">
-  <h1>Device is mobile:</h1>
-  <h4>{{mobileDevice}}</h4>
-</div>
+  <div class="container">
+    <div class="row row-centered">
+      <div class="col-xs-6 col-centered col-fixed"><div class="item"><div class="content">
 
-<div ng-if="notMobile">
-  <h1>{{notMobile}}</h1>
-</div>
+        <h3>ID for current browser/device-type combination:</h3>
+        <p>{{currentState._id}}</p>
+
+        <h3>Browser:</h3>
+        <p>{{currentState.browser}}</p>
+
+        <h3>Device Type:</h3>
+        <div ng-if="mobileDevice">
+          <h3>Device is mobile:</h3>
+          <p>{{mobileDevice}}</p>
+        </div>
+
+        <div ng-if="notMobile">
+          <p>{{notMobile}}</p>
+        </div>
+
+      </div></div></div>
+
+
+    </div>
+  </div>
