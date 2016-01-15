@@ -5,7 +5,7 @@ var db = require('monk')(process.env.MONGOLAB_URI);
 var browsers = db.get('browsers');
 
 router.post('/addBrowser', function(req,res,next){
-  browsers.findOne({browser: req.body.browser}, function(err, doc){
+  browsers.findOne({browser: req.body.browser, isMobile: req.body.isMobile}, function(err, doc){
     if(doc && doc.isMobile == req.body.isMobile){
       res.json(doc);
     } else{
