@@ -43,10 +43,16 @@ app.controller('MainController', function($scope, $http){
     $scope.notMobile = "Not a mobile device."
   }
 
+  if(isMobile.any()){
+    var mobileBoolean = true;
+  }else{
+    var mobileBoolean = true;
+  }
+
   //On page load an http post request will be sent to the express backend
   //where the server's logic will determine if the current browser
   //and device type(mobile or not) needs to be assigned an ID or not
-  $http.post('/addBrowser', {isMobile: isMobile.any(), browser: $scope.browser}).then(function(response){
+  $http.post('/addBrowser', {isMobile: mobileBoolean, browser: $scope.browser}).then(function(response){
     //Then the server responds back with either the newly inserted item
     //or reuses a previously created item that matches the
     //current browser and device type
